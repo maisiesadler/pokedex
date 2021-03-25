@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Pokedex.Domain.Queries;
 
@@ -16,7 +17,9 @@ namespace Pokedex.Domain
         {
             var pokemonSpecies = await _pokemonQuery.Get(pokemonName);
 
-            return new BasicPokemonInformation();
+            var description = pokemonSpecies.FlavorTextEntries.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText;
+
+            return new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name, true);
         }
     }
 }
