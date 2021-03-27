@@ -1,0 +1,17 @@
+name: Build and Test
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  dockerbuild:
+    name: Docker build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Docker build
+        shell: bash
+        run: docker build .
