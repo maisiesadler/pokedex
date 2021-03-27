@@ -9,7 +9,7 @@ using Pokedex.Domain;
 namespace Pokedex.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("pokemon")]
     public class PokemonController : ControllerBase
     {
         private readonly BasicPokemonInformationRetriever _retriever;
