@@ -10,6 +10,8 @@ namespace Pokedex.Tests.Integration
     {
         [Theory]
         [InlineData("mewtwo")]
+        [InlineData("Mewtwo")]
+        [InlineData("MEWTWO")]
         public async Task CanGetPokemon(string pokemonName)
         {
             // Arrange
@@ -29,7 +31,7 @@ namespace Pokedex.Tests.Integration
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 });
-            Assert.Equal(pokemonName, info.Name);
+            Assert.Equal("mewtwo", info.Name);
             Assert.Equal("It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.", info.Description);
             Assert.Equal("rare", info.Habitat);
             Assert.Equal(true, info.IsLegendary);
