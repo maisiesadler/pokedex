@@ -34,7 +34,7 @@ namespace Pokedex.Tests.Integration
             Assert.Equal("mewtwo", info.Name);
             Assert.Equal("It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.", info.Description);
             Assert.Equal("rare", info.Habitat);
-            Assert.Equal(true, info.IsLegendary);
+            Assert.True(info.IsLegendary);
         }
 
         [Fact]

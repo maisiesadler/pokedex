@@ -29,7 +29,7 @@ namespace Pokedex
 
             services
                 .AddRefitClient<IPokeApiClient>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://pokeapi.co/api/v2/"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://pokeapi.co/api/v2"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -43,9 +43,10 @@ namespace Pokedex
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pokedex v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pokedex v1"));
 
             app.UseRouting();
 

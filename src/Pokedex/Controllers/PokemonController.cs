@@ -26,6 +26,7 @@ namespace Pokedex.Controllers
         [HttpGet("{pokemonName}")]
         public async Task<IActionResult> Get([FromRoute] string pokemonName)
         {
+            pokemonName = pokemonName?.ToLower();
             var (ok, basicPokemonInfo) = await _retriever.Get(pokemonName);
             if (!ok) return NotFound();
 
