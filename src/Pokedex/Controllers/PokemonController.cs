@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Pokedex.Domain;
 
 namespace Pokedex.Controllers
 {
@@ -11,17 +12,22 @@ namespace Pokedex.Controllers
     [Route("[controller]")]
     public class PokemonController : ControllerBase
     {
+        private readonly BasicPokemonInformationRetriever _retriever;
         private readonly ILogger<PokemonController> _logger;
 
-        public PokemonController(ILogger<PokemonController> logger)
+        public PokemonController(
+            BasicPokemonInformationRetriever retriever,
+            ILogger<PokemonController> logger)
         {
+            _retriever = retriever;
             _logger = logger;
         }
 
-        [HttpGet("/{pokemonName}")]
-        public IActionResult Get([FromRoute] string pokemonName)
+        [HttpGet("{pokemonName}")]
+        public async Task<IActionResult> Get([FromRoute] string pokemonName)
         {
-            return Ok(pokemonName);
+            var basicPokemonInfo = await _retriever.Get(pokemonName);
+            return Ok(basicPokemonInfo.Name);
         }
     }
 }

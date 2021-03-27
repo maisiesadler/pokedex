@@ -17,7 +17,7 @@ namespace Pokedex.Domain
         {
             var pokemonSpecies = await _pokemonQuery.Get(pokemonName);
 
-            var description = pokemonSpecies.FlavorTextEntries.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText;
+            var description = pokemonSpecies.FlavorTextEntries?.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText;
 
             return new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name, true);
         }

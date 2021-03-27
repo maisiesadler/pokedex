@@ -1,16 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Pokedex.Domain;
+using Pokedex.Domain.Queries;
+using Pokedex.Queries;
+using Refit;
 
 namespace Pokedex
 {
@@ -23,9 +21,15 @@ namespace Pokedex
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<BasicPokemonInformationRetriever>();
+            services.AddTransient<IPokemonQuery, PokemonQuery>();
+            services.AddSingleton<ICache<PokemonSpecies>>(_ => new FileCache<PokemonSpecies>("cache"));
+
+            services
+                .AddRefitClient<IPokeApiClient>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://pokeapi.co/api/v2/"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -34,7 +38,6 @@ namespace Pokedex
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
