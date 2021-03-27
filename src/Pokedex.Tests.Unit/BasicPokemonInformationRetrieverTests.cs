@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -25,14 +24,15 @@ namespace Pokedex.Tests.Unit
 
             var query = new Mock<IPokemonQuery>();
             query.Setup(q => q.Get(It.IsAny<string>()))
-                .ReturnsAsync(testData);
+                .ReturnsAsync((true, testData));
 
             var retriever = new BasicPokemonInformationRetriever(query.Object);
 
             // Act
-            var basicPokemonInfo = await retriever.Get("mewtwo");
+            var (ok, basicPokemonInfo) = await retriever.Get("mewtwo");
 
             // Assert
+            Assert.True(ok);
             Assert.NotNull(basicPokemonInfo);
             Assert.Equal("mewtwo", basicPokemonInfo.Name);
             Assert.Equal("It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.", basicPokemonInfo.Description);
@@ -52,14 +52,15 @@ namespace Pokedex.Tests.Unit
 
             var query = new Mock<IPokemonQuery>();
             query.Setup(q => q.Get(It.IsAny<string>()))
-                .ReturnsAsync(testData);
+                .ReturnsAsync((true, testData));
 
             var retriever = new BasicPokemonInformationRetriever(query.Object);
 
             // Act
-            var basicPokemonInfo = await retriever.Get("mewtwo");
+            var (ok, basicPokemonInfo) = await retriever.Get("mewtwo");
 
             // Assert
+            Assert.True(ok);
             Assert.NotNull(basicPokemonInfo);
             Assert.Null(basicPokemonInfo.Description);
         }

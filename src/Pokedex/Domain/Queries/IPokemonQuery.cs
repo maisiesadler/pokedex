@@ -4,6 +4,6 @@ namespace Pokedex.Domain.Queries
 {
     public interface IPokemonQuery
     {
-        Task<PokemonSpecies> Get(string pokemonName);
+        Task<(bool, PokemonSpecies)> Get(string pokemonName);
     }
 }

@@ -14,15 +14,22 @@ namespace Pokedex.Queries
             _pokeApiClient = pokeApiClient;
         }
 
-        public async Task<PokemonSpecies> Get(string pokemonName)
+        public async Task<(bool, PokemonSpecies)> Get(string pokemonName)
         {
-            var (ok, cached) = await _cache.TryGet(pokemonName);
-            if (ok) return cached;
+            try
+            {
+                var (ok, cached) = await _cache.TryGet(pokemonName);
+                if (ok) return (true, cached);
 
-            var species = await _pokeApiClient.GetSpecies(pokemonName);
-            await _cache.Set(pokemonName, species);
+                var species = await _pokeApiClient.GetSpecies(pokemonName);
+                await _cache.Set(pokemonName, species);
 
-            return species;
+                return (true, species);
+            }
+            catch (Refit.ApiException)
+            {
+                return (false, null);
+            }
         }
     }
 }

@@ -13,13 +13,14 @@ namespace Pokedex.Domain
             _pokemonQuery = pokemonQuery;
         }
 
-        public async Task<BasicPokemonInformation> Get(string pokemonName)
+        public async Task<(bool, BasicPokemonInformation)> Get(string pokemonName)
         {
-            var pokemonSpecies = await _pokemonQuery.Get(pokemonName);
+            var (ok, pokemonSpecies) = await _pokemonQuery.Get(pokemonName);
+            if (!ok) return (false, null);
 
             var description = pokemonSpecies.FlavorTextEntries?.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText;
 
-            return new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name, true);
+            return (true, new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name, true));
         }
     }
 }

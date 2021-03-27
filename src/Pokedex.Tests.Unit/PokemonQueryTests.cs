@@ -22,9 +22,10 @@ namespace Pokedex.Tests.Unit
             var query = new PokemonQuery(cache.Object, client.Object);
 
             // Act
-            var result = await query.Get("mewtwo");
+            var (ok, result) = await query.Get("mewtwo");
 
             // Assert
+            Assert.True(ok);
             Assert.Equal(cachedSpecies, result);
             cache.Verify(c => c.TryGet("mewtwo"), Times.Once);
             client.Verify(c => c.GetSpecies(It.IsAny<string>()), Times.Never);
@@ -45,9 +46,10 @@ namespace Pokedex.Tests.Unit
             var query = new PokemonQuery(cache.Object, client.Object);
 
             // Act
-            var result = await query.Get("mewtwo");
+            var (ok, result) = await query.Get("mewtwo");
 
             // Assert
+            Assert.True(ok);
             Assert.Equal(species, result);
             cache.Verify(c => c.TryGet(It.IsAny<string>()), Times.Once);
             client.Verify(c => c.GetSpecies("mewtwo"), Times.Once);
@@ -68,9 +70,10 @@ namespace Pokedex.Tests.Unit
             var query = new PokemonQuery(cache.Object, client.Object);
 
             // Act
-            var result = await query.Get("mewtwo");
+            var (ok, result) = await query.Get("mewtwo");
 
             // Assert
+            Assert.True(ok);
             Assert.Equal(species, result);
             cache.Verify(c => c.Set("mewtwo", species), Times.Once);
         }
