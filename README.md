@@ -4,21 +4,29 @@
 
 ## Getting Started
 
+Prerequisites
+- [dotnet 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+
+Clone the repo
+
 `dotnet run -p src/Pokedex`
 
 Then navigate to `http://localhost:5000/swagger/index.html` to use the swagger docs.
 
+To run tests
+
+`dotnet test`
+
 ### Using Docker
+
+Prerequisites
+- [Docker desktop](https://www.docker.com/products/docker-desktop)
 
 `docker build -t pokedex .`
 
-`docker run -p 8080:80`
+`docker run -p 8080:80 pokedex`
 
 Then navigate to `http://localhost:8080/swagger/index.html` to use the swagger docs.
-
-### To run tests
-
-`dotnet test`
 
 ## Design decisions
 
