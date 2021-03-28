@@ -18,7 +18,7 @@ namespace Pokedex.Domain
             var (ok, pokemonSpecies) = await _pokemonQuery.Get(pokemonName);
             if (!ok) return (false, null);
 
-            var description = pokemonSpecies.FlavorTextEntries?.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText;
+            var description = pokemonSpecies.FlavorTextEntries?.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText ?? string.Empty;
 
             return (true, new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name ?? string.Empty, pokemonSpecies.IsLegendary));
         }

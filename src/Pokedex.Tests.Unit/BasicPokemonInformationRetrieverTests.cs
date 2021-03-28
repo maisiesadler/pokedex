@@ -41,7 +41,7 @@ namespace Pokedex.Tests.Unit
         }
 
         [Fact]
-        public async Task IfNoFlavorTextEntryInEnglishThenNullDescription()
+        public async Task IfNoFlavorTextEntryInEnglishThenEmptyDescription()
         {
             // Arrange
             var flavorTextEntries = new List<FlavorTextEntry>
@@ -62,7 +62,7 @@ namespace Pokedex.Tests.Unit
             // Assert
             Assert.True(ok);
             Assert.NotNull(basicPokemonInfo);
-            Assert.Null(basicPokemonInfo.Description);
+            Assert.Equal(string.Empty, basicPokemonInfo.Description);
         }
     }
 }
