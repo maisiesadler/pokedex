@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Pokedex.Domain;
 using Pokedex.Domain.Queries;
@@ -24,12 +25,19 @@ namespace Pokedex
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<BasicPokemonInformationRetriever>();
+            services.AddTransient<TranslatedPokemonInformationRetriever>();
             services.AddTransient<IPokemonQuery, PokemonQuery>();
-            services.AddSingleton<ICache<PokemonSpecies>>(_ => new FileCache<PokemonSpecies>("cache"));
+            services.AddTransient<ITranslationQuery, TranslationQuery>();
+            services.AddSingleton<ICache<PokemonSpecies>>(sp => new FileCache<PokemonSpecies>("cache", sp.GetRequiredService<ILogger<FileCache<PokemonSpecies>>>()));
+            services.AddSingleton<ICache<string>>(sp => new FileCache<string>("translation-cache", sp.GetRequiredService<ILogger<FileCache<string>>>()));
 
             services
                 .AddRefitClient<IPokeApiClient>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://pokeapi.co/api/v2"));
+
+            services
+                .AddRefitClient<IFunTranslationsApiClient>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.funtranslations.com"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -7,12 +7,15 @@ namespace Pokedex.Domain.Queries
     {
         public string Name { get; }
 
+        [JsonPropertyName("is_legendary")]
+        public bool IsLegendary { get; }
+
         [JsonPropertyName("flavor_text_entries")]
         public List<FlavorTextEntry> FlavorTextEntries { get; }
 
         public Resource Habitat { get; }
 
-        public PokemonSpecies(string name, List<FlavorTextEntry> flavorTextEntries, Resource habitat)
-            => (Name, FlavorTextEntries, Habitat) = (name, flavorTextEntries, habitat);
+        public PokemonSpecies(string name, bool isLegendary, List<FlavorTextEntry> flavorTextEntries, Resource habitat)
+            => (Name, IsLegendary, FlavorTextEntries, Habitat) = (name, isLegendary, flavorTextEntries, habitat);
     }
 }

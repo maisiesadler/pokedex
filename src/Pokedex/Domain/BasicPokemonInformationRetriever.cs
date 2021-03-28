@@ -20,7 +20,7 @@ namespace Pokedex.Domain
 
             var description = pokemonSpecies.FlavorTextEntries?.FirstOrDefault(f => f.Language?.Name == "en")?.FlavorText;
 
-            return (true, new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name, true));
+            return (true, new BasicPokemonInformation(pokemonSpecies.Name, description, pokemonSpecies.Habitat?.Name ?? string.Empty, pokemonSpecies.IsLegendary));
         }
     }
 }

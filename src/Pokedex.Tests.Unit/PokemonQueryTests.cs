@@ -13,7 +13,7 @@ namespace Pokedex.Tests.Unit
         public async Task RetrievedFromCacheIfAvailable()
         {
             // Arrange
-            var cachedSpecies = new PokemonSpecies("", new List<FlavorTextEntry>(), new Resource("", ""));
+            var cachedSpecies = new PokemonSpecies("", true, new List<FlavorTextEntry>(), new Resource("", ""));
             var cache = new Mock<ICache<PokemonSpecies>>();
             cache.Setup(c => c.TryGet(It.IsAny<string>()))
                 .ReturnsAsync((true, cachedSpecies));
@@ -38,7 +38,7 @@ namespace Pokedex.Tests.Unit
             var cache = new Mock<ICache<PokemonSpecies>>();
             cache.Setup(c => c.TryGet(It.IsAny<string>()))
                 .ReturnsAsync((false, null));
-            var species = new PokemonSpecies("", new List<FlavorTextEntry>(), new Resource("", ""));
+            var species = new PokemonSpecies("", true, new List<FlavorTextEntry>(), new Resource("", ""));
             var client = new Mock<IPokeApiClient>();
             client.Setup(c => c.GetSpecies(It.IsAny<string>()))
                 .ReturnsAsync(species);
@@ -62,7 +62,7 @@ namespace Pokedex.Tests.Unit
             var cache = new Mock<ICache<PokemonSpecies>>();
             cache.Setup(c => c.TryGet(It.IsAny<string>()))
                 .ReturnsAsync((false, null));
-            var species = new PokemonSpecies("", new List<FlavorTextEntry>(), new Resource("", ""));
+            var species = new PokemonSpecies("", true, new List<FlavorTextEntry>(), new Resource("", ""));
             var client = new Mock<IPokeApiClient>();
             client.Setup(c => c.GetSpecies(It.IsAny<string>()))
                 .ReturnsAsync(species);

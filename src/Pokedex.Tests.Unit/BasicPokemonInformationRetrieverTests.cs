@@ -48,7 +48,7 @@ namespace Pokedex.Tests.Unit
             {
                 new FlavorTextEntry("Un Pokémon conçu en réorganisant\nles gènes de Mew. On raconte qu’il\ns’agit du Pokémon le plus féroce.", new Resource("fr", "https://pokeapi.co/api/v2/language/5/"))
             };
-            var testData = new PokemonSpecies("name", flavorTextEntries, new Resource("rare", "https://pokeapi.co/api/v2/pokemon-habitat/5/"));
+            var testData = new PokemonSpecies("name", true, flavorTextEntries, new Resource("rare", "https://pokeapi.co/api/v2/pokemon-habitat/5/"));
 
             var query = new Mock<IPokemonQuery>();
             query.Setup(q => q.Get(It.IsAny<string>()))
