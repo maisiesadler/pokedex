@@ -1,6 +1,6 @@
 # Pokedex
 
-[![Build and Test](https://github.com/maisie-tests/pokedex/actions/workflows/buildtest.yml/badge.svg)](https://github.com/maisie-tests/pokedex/actions/workflows/buildtest.yml)
+[![Build and Test](https://github.com/maisiesadler/pokedex/actions/workflows/buildtest.yml/badge.svg)](https://github.com/maisiesadler/pokedex/actions/workflows/buildtest.yml)
 
 ## Getting Started
 
