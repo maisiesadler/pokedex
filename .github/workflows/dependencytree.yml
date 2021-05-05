@@ -18,7 +18,7 @@ jobs:
 
     - name: Generate UML dependencies
       id: generate_uml
-      uses: maisiesadler/deptree@v0.0.30-config.0
+      uses: maisiesadler/deptree@v0.0.30
       env:
         ASSEMBLY_LOCATION: '/home/runner/work/pokedex/pokedex/src/Pokedex/bin/Debug/net5.0/linux-x64/Pokedex.dll'
         ROOT_TYPES: 'Pokedex.Controllers.PokemonController'
