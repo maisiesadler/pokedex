@@ -14,14 +14,14 @@ jobs:
     - uses: actions/setup-dotnet@v1
 
     - name: Build project
-      run: dotnet build -c Release
+      run: dotnet publish -r ubuntu.14.04-x64 -p:PublishSingleFile=true -p:UseAppHost=true --self-contained
       working-directory: ./src/Pokedex
 
     - name: Generate UML dependencies
       id: generate_uml
       uses: maisiesadler/deptree@v0.0.30-beta001
       env:
-        ASSEMBLY_LOCATION: './src/Pokedex/bin/Release/net5.0/Pokedex.dll'
+        ASSEMBLY_LOCATION: './out/Pokedex'
         ROOT_TYPES: 'Pokedex.Controllers.PokemonController'
 
     - name: Output file

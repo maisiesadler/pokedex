@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>osx.10.12-x64,ubuntu.14.04-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
