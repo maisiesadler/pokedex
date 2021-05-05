@@ -25,7 +25,7 @@ jobs:
       id: generate_uml
       uses: maisiesadler/deptree@v0.0.30-beta001
       env:
-        ASSEMBLY_LOCATION: './src/src/Pokedex/bin/Release/net5.0/src/Pokedex.dll'
+        ASSEMBLY_LOCATION: './src/Pokedex/bin/Release/net5.0/Pokedex.dll'
         ROOT_TYPES: 'Pokedex.Controllers.PokemonController'
 
     - name: Output file
