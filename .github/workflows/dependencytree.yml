@@ -15,7 +15,6 @@ jobs:
 
     - name: Build project
       run: dotnet publish -r ubuntu.14.04-x64 -o=out -p:PublishSingleFile=true -p:UseAppHost=true --self-contained
-      working-directory: ./src/Pokedex
 
     - name: Generate UML dependencies
       id: generate_uml
